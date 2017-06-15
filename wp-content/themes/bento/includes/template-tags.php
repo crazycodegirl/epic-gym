@@ -774,7 +774,7 @@ if ( ! function_exists( 'bento_copyright' ) ) {
 		$sitename = '<a href="'.esc_url( home_url( '/' ) ).'">'.esc_attr( get_bloginfo( 'name' ) ).'</a>';
 		$author = esc_html__( 'Bento theme by Satori', 'bento' );
 		if ( is_front_page() ) {
-			$author = esc_html__( 'Bento theme by', 'bento' ).' <a href="http://satoristudio.net/" target="blank" title="Satori Studio">Satori</a>';
+			$author = esc_html__( 'Bento theme by', 'bento' ).' <a href="http://satoristudio.net/" target="blank" title="Satori Studio">Satori Design</a>';
 		}
 		$copyright = '<div class="footer-copyright">';
 		if ( get_option( 'bento_ep_license_status' ) == 'valid' && get_theme_mod( 'bento_footer_copyright' ) != '' ) {
@@ -880,7 +880,11 @@ if ( ! function_exists( 'bento_masonry_item_content' ) ) {
 		$tile_background .= 'style=background-image:url("'.$tile_image.'")';
 		if ( get_post_meta( $post->ID, 'bento_tile_overlay_opacity', true) != '' ) {
 			if ( get_post_meta( $bento_parent_page_id, 'bento_hide_tile_overlays', true) != 'on' ) {
-				$tile_opacity = 'opacity:'.esc_html( get_post_meta( $post->ID, 'bento_tile_overlay_opacity', true) ).';';
+				$tile_opacity_raw = esc_html( get_post_meta( $post->ID, 'bento_tile_overlay_opacity', true) );
+				if ( $tile_opacity_raw > 1 ) {
+					$tile_opacity_raw = $tile_opacity_raw / 10;
+				}
+				$tile_opacity = 'opacity:'.$tile_opacity_raw.';';
 			} else {
 				$tile_opacity = 'opacity: 0.0';
 			}
