@@ -28,6 +28,8 @@
 	color: #84bb29;
 }
 
+
+
 /* Sidebar widgets */
 
    /* upcoming events */
@@ -185,6 +187,36 @@
 .contact-info .email {
   width: 35%;
   float: left;
+}
+
+/* Sponsorships page */
+
+.sponsor1 {
+  width: 100%;
+}
+.text-left {
+  float: left;
+  width: 50%;
+}
+
+.img-right {
+  float: left;
+  width: 50%;
+  margin-bottom: 75px;
+}
+
+.sponsor2 {
+  width: 100%;
+}
+.img-left {
+  float: left;
+  width: 50%;
+}
+
+.text-right {
+  float: left;
+  width: 50%;
+  margin-bottom: 75px;
 }
 
 /* 404 */
