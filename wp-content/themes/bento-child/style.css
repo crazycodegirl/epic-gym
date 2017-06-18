@@ -1,10 +1,10 @@
 /*
   Theme Name: Bento Child
+  Template: bento
   Theme URI: http://epicgymidaho.com/bento-child/
   Description: Bento Child Theme
   Author: Joanne Sullivan
   Author URI: http://tangledcreekwebdevelopment.com
-  Template: Bento
   Version: 1.0.0
   License: GNU General Public License v2 or later
   License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -66,8 +66,14 @@
   margin-top: 2.5em;
 }
 
-.summary .arnold-quote h2 {
-  margin-bottom: auto;
+.arnold-quote {
+  width: 75%;
+  text-align: right;
+}
+
+.arnold-quote h2 {
+  font-style: italic;
+  margin-bottom: 0;
 }
 
 /* Nutritional Health Page */
