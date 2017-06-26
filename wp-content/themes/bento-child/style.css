@@ -44,6 +44,7 @@
   margin-top: 2.5em;
   height: 23em;
   width: 100%;
+  background-color: red;
 }
 
 .membership-info h2 {
@@ -229,15 +230,16 @@
 
 .error-message {
   width: 97%;
-  height: 20em;
+  height: 30em;
   margin-left: 2em;
   clear: both;
 }
 
-.image {
+.gif {
   width: 25%;
   padding-left: 3em;
   float: left;
+  overflow: auto;
 }
 
 .message {

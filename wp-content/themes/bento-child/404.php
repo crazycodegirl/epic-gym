@@ -4,8 +4,8 @@
 get_header();
 ?>
 <div class="error-message">
-   <div class="image">
-     <img src="img/elk-looking.png" alt="Young bull elk in trees" style="width:250px;height:335px;">
+   <div class="gif">
+     <iframe src="https://giphy.com/embed/r9JRreEKA9Xsk" width="360" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/searching-r9JRreEKA9Xsk">via GIPHY</a></p>
    </div>
    <div class="message">
      <h2 class="oops">Looking for something?</h2>
