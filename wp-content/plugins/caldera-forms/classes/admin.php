@@ -121,6 +121,8 @@ class Caldera_Forms_Admin {
 
 		add_action( 'init', array( $this, 'init_pro_admin' ) );
 
+		add_action( 'init', array( 'Caldera_Forms_Admin_Resend', 'watch_for_resend' ) );
+
 		/**
 		 * Runs after Caldera Forms admin is initialized
 		 *
@@ -591,7 +593,9 @@ class Caldera_Forms_Admin {
 				),
 				'class'  => 'button-primary'
 			);
+
 		}
+
 
 		return $buttons;
 	}
@@ -900,16 +904,21 @@ class Caldera_Forms_Admin {
 							$is_json = json_decode( $row->value, ARRAY_A );
 							if ( ! empty( $is_json ) ) {
 								$row->value = $is_json;
+							}else  {
+								$row->value = maybe_unserialize( $row->value );
 							}
 
-						if( is_string( $row->value ) ){
-							$row->value = esc_html( stripslashes_deep( $row->value ) );
-						}else{
-							$row->value = stripslashes_deep( Caldera_Forms_Sanitize::sanitize( $row->value ) );
-						}
+							if( is_array( $row->value )  ) {
+								$row->value = implode( ',' , $row->value );
+							}
+
+							if( is_string( $row->value ) ){
+								$row->value = esc_html( stripslashes_deep( $row->value ) );
+							}else{
+								$row->value = stripslashes_deep( Caldera_Forms_Sanitize::sanitize( $row->value ) );
+							}
 
 							$row->value = apply_filters( 'caldera_forms_view_field_' . $field[ 'type' ], $row->value, $field, $form );
-
 
 							if ( isset( $data[ 'entries' ][ $e ][ 'data' ][ $row->slug ] ) ) {
 								// array based - add another entry
@@ -1880,6 +1889,17 @@ class Caldera_Forms_Admin {
 	public static function init_pro_admin(){
 		$pro_admin = new Caldera_Forms_Admin_Pro;
 		$pro_admin->add_hooks();
+	}
+
+	/**
+	 * Get URL for main admin page
+	 *
+	 * @since 1.5.2
+	 *
+	 * @return string
+	 */
+	public static function main_admin_page_url(){
+		return add_query_arg( 'page', Caldera_Forms::PLUGIN_SLUG, admin_url( 'admin.php' ) );
 	}
 
 }

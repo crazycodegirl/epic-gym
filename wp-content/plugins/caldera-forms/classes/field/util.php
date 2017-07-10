@@ -147,6 +147,10 @@ class Caldera_Forms_Field_Util {
 				"field_error"        => array( "has-error" ),
 			);
 
+			if( self::is_file_field( $field, $form ) ){
+				$field_classes[ 'field' ] = array();
+			}
+
 
 			$field_classes = apply_filters( 'caldera_forms_render_field_classes', $field_classes, $field, $form );
 			$field_classes = apply_filters( 'caldera_forms_render_field_classes_type-' . $field[ 'type' ], $field_classes, $field, $form );
@@ -516,7 +520,7 @@ class Caldera_Forms_Field_Util {
 			$option_values = Caldera_Forms_Field_Util::find_option_values( $field );
 
 			if( isset( $field['config'] ) && ! empty( $field[ 'config' ][ 'default_option' ] ) ) {
-				$field_value = $field['config']['default_option'];
+				$field_value = Caldera_Forms::do_magic_tags(  $field[ 'config' ][ 'default_option' ] );
 			}elseif( is_string( $field_value ) && array_key_exists( $field_value, $option_values ) ){
 				$field_value = $option_values[ $field_value ];
 			}

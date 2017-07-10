@@ -34,7 +34,7 @@ class Caldera_Forms_Field_Calculation {
 		 * @param array $form Form config
 		 *
 		 */
-		return boolval( apply_filters( 'caldera_forms_checkbox_calculate_sum', true, $field, $form ) );
+		return (bool) apply_filters( 'caldera_forms_checkbox_calculate_sum', true, $field, $form );
 
 	}
 
@@ -70,7 +70,7 @@ class Caldera_Forms_Field_Calculation {
 				break;
 			case 'radio':
 			case 'dropdown':
-			case 'toggle' :
+			case 'toggle_switch' :
 				$number = self::find_calc_value( $entry_value, $field, $form );
 
 				break;

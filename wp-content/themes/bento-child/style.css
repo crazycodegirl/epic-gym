@@ -175,6 +175,35 @@
   text-align: center;
 }
 
+.partner-contact {
+  width: 100%;
+}
+
+.partner1 {
+  height: 10em;
+  padding-top: 2em;
+}
+
+.partner2 {
+  height: 14em;
+}
+
+.partner3 {
+  height: 10em;
+}
+
+.partner-img {
+  float: left;
+  padding-bottom: 1.5em;
+  width: 15%;
+}
+
+.partner-desc {
+  float: left;
+  padding-left: 3em;
+  width: 85%;
+}
+
 /* Contact page */
 
 .contact-info {

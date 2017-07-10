@@ -177,6 +177,10 @@ class Caldera_Forms {
 		/** Load magic tag system */
 		new Caldera_Forms_Magic();
 
+		//init utm tag field handler
+		$utm = new Caldera_Forms_Field_Utm();
+		$utm->add_hooks();
+
 		//clear syncer cache on form update
 		add_action( 'caldera_forms_save_form', array( 'Caldera_Forms_Sync_Factory', 'clear_cache' ) );
 
@@ -690,7 +694,7 @@ class Caldera_Forms {
 				'slug'     => $field[ 'slug' ],
 				'value'    => $entry_data,
 			);
-			$wpdb->insert( $wpdb->prefix . 'cf_form_entry_values', $new_entry );
+			Caldera_Forms_Entry_Field::insert( $new_entry );
 		}
 
 	}
@@ -726,11 +730,31 @@ class Caldera_Forms {
 			$entry = Caldera_Forms_Sanitize::sanitize( $raw_entry );
 
 			if ( has_filter( 'caldera_forms_save_field' ) ) {
-				$entry = apply_filters( 'caldera_forms_save_field', $entry, $field );
+				/**
+				 * Filter field data before saving
+				 *
+				 * @since unknown
+				 *
+				 * @param mixed $entry Field data to save
+				 * @param array $field Field config
+				 * @param array $form Form config @since 1.5.2
+				 * @param int $entry_id ID of entry to save for  @since 1.5.2
+				 */
+				$entry = apply_filters( 'caldera_forms_save_field', $entry, $field, $form, $entry_id );
 			}
 
 			if ( has_filter( 'caldera_forms_save_field_' . $field[ 'type' ] ) ) {
-				$entry = apply_filters( 'caldera_forms_save_field_' . $field[ 'type' ], $entry, $field );
+				/**
+				 * Filter field data before saving for a specific field type
+				 *
+				 * @since unknown
+				 *
+				 * @param mixed $entry Field data to save
+				 * @param array $field Field config
+				 * @param array $form Form config @since 1.5.2
+				 * @param int $entry_id ID of entry to save for  @since 1.5.2
+				 */
+				$entry = apply_filters( 'caldera_forms_save_field_' . $field[ 'type' ], $entry, $field, $form, $entry_id );
 			}
 
 			$field_item = array(
@@ -747,7 +771,7 @@ class Caldera_Forms {
 				$field_item[ 'slug' ] .= '.' . $key;
 			}
 			// Save
-			$wpdb->insert( $wpdb->prefix . 'cf_form_entry_values', $field_item );
+			Caldera_Forms_Entry_Field::insert( $field_item );
 		}
 
 		if ( ! empty( $keyed ) ) {
@@ -762,7 +786,7 @@ class Caldera_Forms {
 				'slug'     => $field[ 'slug' ],
 				'value'    => json_encode( $data )
 			);
-			$wpdb->insert( $wpdb->prefix . 'cf_form_entry_values', $field_item );
+			Caldera_Forms_Entry_Field::insert( $field_item );
 		}
 
 	}
@@ -2296,7 +2320,6 @@ class Caldera_Forms {
 		}
 
 		$field_types = Caldera_Forms_Fields::get_all();
-
 		foreach ( $form[ 'fields' ] as $field_id => $field ) {
 
 			if ( $field[ 'slug' ] == $slug ) {
@@ -2626,7 +2649,7 @@ class Caldera_Forms {
 				}
 				// check for a hash
 				if ( isset( $fieldConfig[ 'save' ] ) ) {
-					add_filter( 'caldera_forms_save_field_' . $fieldType, $fieldConfig[ 'save' ], 10, 3 );
+					add_filter( 'caldera_forms_save_field_' . $fieldType, $fieldConfig[ 'save' ], 10, 4 );
 				}
 				// check for a hash
 				if ( isset( $fieldConfig[ 'validate' ] ) ) {
@@ -3531,6 +3554,7 @@ class Caldera_Forms {
 				} else {
 					$field_value = esc_html( stripslashes_deep( $field_value ) );
 				}
+
 			}
 			// set view
 			$field_view = apply_filters( 'caldera_forms_view_field_' . $field[ 'type' ], $field_value, $field, $form );
@@ -3856,7 +3880,7 @@ class Caldera_Forms {
 
 
 		// is this form allowed to render ( check state )
-		if ( isset( $form[ 'form_draft' ] ) ) {
+		if ( ! empty( $form[ 'form_draft' ] ) ) {
 			if ( ! isset( $_GET[ 'cf_preview' ] ) || $_GET[ 'cf_preview' ] != $form[ 'ID' ] ) {
 				if ( isset( $_POST[ 'action' ] ) && $_POST[ 'action' ] == 'cf_get_form_preview' ) {
 					echo '<p style="color: #cf0000;">' . __( 'Form is currently not active.', 'caldera-forms' ) . '</p>';
@@ -3925,6 +3949,7 @@ class Caldera_Forms {
 
 		}
 
+		$current_form_count = Caldera_Forms_Render_Util::get_current_form_count();
 		if ( empty( $current_form_count ) ) {
 			$current_form_count = 0;
 		}
