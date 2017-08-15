@@ -44,7 +44,7 @@
   margin-top: 2.5em;
   height: 23em;
   width: 100%;
-  background-color: red;
+
 }
 
 .membership-info h2 {
@@ -52,19 +52,15 @@
 }
 
 .monthly {
-  width: 45%;
-  float: left;
+  width: 100%;
 }
 
 .contract {
-  width: 45%;
-  float: left;
-  padding-left: 5%;
+  width: 100%;
 }
 
 .summary {
-  clear: both;
-  margin-top: 2.5em;
+  margin-top: 19em;
 }
 
 .arnold-quote {
@@ -81,11 +77,11 @@
 
 .stop {
   background-color: #ff6666;
-  float: left;
+  margin-bottom: 1em;
   padding-left: 2%;
   padding-top: .5%;
   padding-bottom: 1%;
-  width: 45%;
+  width: 100%;
 }
 
 .stop ul li {
@@ -96,11 +92,10 @@
 
 .learn {
   background-color: #8585e0;
-  float: right;
   padding-left: 2%;
   padding-top: .5%;
   padding-bottom: 1%;
-  width: 45%;
+  width: 100%;
 }
 
 .learn ul li {
@@ -139,36 +134,27 @@
 }
 .boxes {
   width: 100%;
-  height: 11em;
+
 }
 
 .box-plans {
-  width: 31%;
+  width: 100%;
   background-color: #99ff99;
-  float: left;
-  height: 10em;
-  padding-left: 2%;
-  padding-right: 2%;
+  margin-bottom: 1em;
+  padding: 1% 2% 1% 2%;
 }
 
 .box-portion {
-  width: 31%;
+  width: 100%;
   background-color: #99ff99;
-  float: left;
-  height: 10em;
-  padding-left: 2%;
-  padding-right: 2%;
-  margin-left: 1em;
-  margin-right: 1em;
+  margin-bottom: 1em;
+  padding: 1% 2% 1% 2%;
 }
 
 .box-results {
-  width: 31%;
+  width: 100%;
   background-color: #99ff99;
-  float: left;
-  height: 10em;
-  padding-left: 2%;
-  padding-right: 2%;
+  padding: 1% 2% 1% 2%;
 }
 
 .description h2 {
@@ -185,7 +171,7 @@
 }
 
 .partner2 {
-  height: 14em;
+  height: 10em;
 }
 
 .partner3 {
@@ -211,18 +197,19 @@
 }
 
 .contact-info .address {
-  width: 35%;
-  float: left;
+  width: 100%;
 }
 
 .contact-info .phone {
-  width: 25%;
-  float: left;
+  width: 100%;
 }
 
 .contact-info .email {
-  width: 35%;
-  float: left;
+  width: 100%;
+}
+
+iframe, object, embed {
+    max-width: 100%;
 }
 
 /* Sponsorships page */
@@ -288,4 +275,120 @@
 
 #text-3 {
   text-align: right;
+}
+
+/* media queries */
+@media (min-width: 768px) {
+
+  /* home page */
+
+  .summary {
+    margin-top: 12em;
+  }
+
+  /* Nutritional Health Page */
+
+  .stop {
+    margin-bottom: 1em;
+    width: 100%;
+  }
+
+  .learn {
+    width: 100%;
+  }
+
+
+
+
+
+
+}
+
+@media (min-width: 940px) {
+
+  /* home page */
+
+  .monthly {
+    width: 45%;
+    float: left;
+  }
+
+  .contract {
+    width: 45%;
+    float: left;
+    padding-left: 5%;
+  }
+
+  .summary {
+    margin-top: 2.5em;
+  }
+
+  /* Nutritional Health Page */
+
+  .stop {
+    float: left;
+    padding-left: 2%;
+    padding-top: .5%;
+    padding-bottom: 1%;
+    width: 45%;
+  }
+
+  .learn {
+    float: right;
+    padding-left: 2%;
+    padding-top: .5%;
+    padding-bottom: 1%;
+    width: 45%;
+  }
+
+  /* Contact page */
+
+  .contact-info {
+    width: 100%;
+  }
+
+  .contact-info .address {
+    width: 35%;
+    float: left;
+  }
+
+  .contact-info .phone {
+    width: 25%;
+    float: left;
+  }
+
+  .contact-info .email {
+    width: 35%;
+    float: left;
+  }
+
+  /* Everyday Simple Meal Prep */
+
+  .box-plans {
+    width: 31%;
+    background-color: #99ff99;
+    float: left;
+    height: 10em;
+  }
+
+  .box-portion {
+    width: 31%;
+    background-color: #99ff99;
+    float: left;
+    height: 10em;
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  .box-results {
+    width: 31%;
+    background-color: #99ff99;
+    float: left;
+    height: 10em;
+  }
+
+  .partner2 {
+    height: 14em;
+  }
+
 }
